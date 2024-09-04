@@ -1,0 +1,64 @@
+<div class="space-y-3">
+    <h2 class="font-bold text-3xl text-center">Your Playlist</h2>
+    <form id="playlist-container">
+        <ul class="flex flex-wrap flex-row gap-4 border-1 border-gray-800 p-4 rounded-xl">
+            {% for song in playlist %}
+                <li>
+                    <div class="card w-80 bg-base-100 shadow-xl">
+                        <figure>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor"
+                                 class="size-10">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                            </svg>
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title text-base">{{ song.name }}</h2>
+                            <ul class="flex flex-row gap-2 justify-start items-center">
+                                <li class="text-xs">{{ song.release_year }}</li>
+                                {% for artist in song.artists %}
+                                    <li class="rounded-full size-1.5 bg-gray-600"></li>
+                                    <li>{{ artist }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </form>
+</div>
+<div class="space-y-3 mt-20">
+    <h2 class="text-2xl font-bold">Recommended Songs for you</h2>
+    <ul class="grid grid-cols-3 gap-2 gap-y-4 border-1 border-gray-800 p-4 rounded-xl">
+        {% for song in recommendations %}
+            <li class="h-full">
+                <div class="card w-80 h-full bg-base-100 shadow-xl">
+                    <figure class="mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                        </svg>
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-base">{{ song.name }}</h2>
+                        <ul class="flex flex-row gap-2 justify-start items-center">
+                            <li class="text-xs">{{ song.release_year }}</li>
+                            {% for artist in song.artists %}
+                                <li class="rounded-full size-1.5 bg-gray-600"></li>
+                                <li>{{ artist }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,55 @@
+<div class="card hidden bg-base-100 shadow-xl border-red-700 border-2 text-red-700"
+     id="error"
+     hx-swap-oob="true"
+     hx-swap="outerHTML"></div>
+<ul id="search-results" class="max-h-xl space-y-1 overflow-y-scroll px-2">
+    {% for song in results %}
+        <li>
+            <div class="card card-side bg-base-100 shadow-xl min-h-20 max-h-40 gap-4 hover:bg-gray-100 transition-all duration-300">
+                <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.5"
+                         stroke="currentColor"
+                         class="size-10">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                    </svg>
+                </figure>
+                <div class="card-body p-2 gap-1">
+                    <h2 class="card-title text-base">{{ song.name }}</h2>
+                    <ul class="flex flex-row gap-2 justify-start items-center">
+                        <li class="text-xs">{{ song.release_year }}</li>
+                        {% for artist in song.artists %}
+                            <li class="rounded-full size-1.5 bg-gray-600"></li>
+                            <li>{{ artist }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form class="card-actions justify-start"
+                          hx-post="/add-to-playlist"
+                          hx-target="#playlist-container"
+                          hx-swap="outerHTML">
+                        <input type="text" name="name" value="{{ song.name }}" class="hidden" />
+                        <input type="text"
+                               name="year"
+                               value="{{ song.release_year }}"
+                               class="hidden" />
+                        <div>
+                            <button class="btn btn-primary btn-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                                Add to Playlist
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

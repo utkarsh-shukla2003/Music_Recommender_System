@@ -1,0 +1,17 @@
+<div class="card bg-base-100 shadow-xl border-red-700 border-2 text-red-700"
+     id="error"
+     hx-swap-oob="true"
+     hx-swap="outerHTML">
+    <div class="card-body">
+        <h2 class="card-title">Error</h2>
+        <p>
+            {% if msg %}
+                {{ msg }}
+            {% else %}
+                Something went wrong, please try later
+            {% endif %}
+        </p>
+    </div>
+</div>
+<ul id="search-results" class="max-h-5xl space-y-1 overflow-y-auto">
+</ul>

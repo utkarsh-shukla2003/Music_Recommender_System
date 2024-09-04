@@ -1,0 +1,44 @@
+<ul id="search-results"
+    class="max-h-xl space-y-1 overflow-y-scroll px-2"
+    hx-swap-oob="true"
+    hx-swap="outerHTML">
+</ul>
+<form id="playlist-container"
+      hx-post="/recommend"
+      hx-target="#main-body"
+      hx-swap="innerHTML">
+    <ul class="flex flex-wrap flex-row gap-4 border-1 border-gray-800 p-4 rounded-xl">
+        {% for song in playlist %}
+            <li>
+                <input type="text" name="name" value="{{ song.name }}" class="hidden" />
+                <input type="text"
+                       name="year"
+                       value="{{ song.release_year }}"
+                       class="hidden" />
+                <div class="card w-96 bg-base-100 shadow-xl">
+                    <figure>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="size-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                        </svg>
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-base">{{ song.name }}</h2>
+                        <ul class="flex flex-row gap-2 justify-start items-center">
+                            <li class="text-xs">{{ song.release_year }}</li>
+                            {% for artist in song.artists %}
+                                <li class="rounded-full size-1.5 bg-gray-600"></li>
+                                <li>{{ artist }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <button class="btn btn-primary btn-wide" type="Submit">Recommend Songs</button>
+</form>
